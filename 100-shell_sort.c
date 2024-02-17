@@ -45,7 +45,7 @@ void shell_sort(int *array, size_t size)
 			y = i;
 			x = i - gap;
 
-			while (array[x] > array[y])
+			while (x < size && array[x] > array[y])
 			{
 				tmp = array[y];
 				array[y] = array[x];
