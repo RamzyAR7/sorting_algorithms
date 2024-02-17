@@ -36,9 +36,9 @@ void shell_sort(int *array, size_t size)
 				array[x] = tmp;
 				y = x;
 				x -= gap;
-				print_array(array, size);
 			}
 		}
 		gap = (gap - 1) / 3;
+		print_array(array, size);
 	}
 }
