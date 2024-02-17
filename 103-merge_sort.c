@@ -56,6 +56,8 @@ void top_down_merge(int *arr, int start, int midpoint, int end, int *arr_b)
 		}
 	}
 	printf("[Done]: ");
+	printf("%d\n", start);
+	printf("%d\n", end);
 	printf("%d", arr[start]);
 	for (demo_index = (start + 1); demo_index < end; demo_index++)
 	{
