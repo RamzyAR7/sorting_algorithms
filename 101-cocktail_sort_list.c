@@ -26,19 +26,17 @@ void swap_element(listint_t *element_a, listint_t *element_b, listint_t **lst)
 */
 int bubble_smaller_to_left(listint_t **iterate, listint_t **list)
 {
-	int swap_flag = 0, cocktail_sort_swap = 0;
+	int cocktail_sort_swap = 0;
 
 	while ((*iterate)->prev)
 	{
-		swap_flag = 0;
 		if ((*iterate)->n < (*iterate)->prev->n)
 		{
 			swap_element((*iterate)->prev, *iterate, list);
 			print_list(*list);
-			swap_flag = 1;
 			cocktail_sort_swap = 1;
 		}
-		if (swap_flag == 0)
+		else
 			*iterate = (*iterate)->prev;
 	}
 	return (cocktail_sort_swap);
@@ -51,19 +49,17 @@ int bubble_smaller_to_left(listint_t **iterate, listint_t **list)
 */
 int bubble_larger_to_right(listint_t **iterate, listint_t **list)
 {
-	int swap_flag = 0, cocktail_sort_swap = 0;
+	int cocktail_sort_swap = 0;
 
 	while ((*iterate)->next)
 	{
-		swap_flag = 0;
 		if ((*iterate)->n > ((*iterate)->next)->n)
 		{
 			swap_element((*iterate), (*iterate)->next, list);
 			print_list(*list);
-			swap_flag = 1;
 			cocktail_sort_swap = 1;
 		}
-		if (swap_flag == 0)
+		else
 			*iterate = (*iterate)->next;
 	}
 	return (cocktail_sort_swap);
