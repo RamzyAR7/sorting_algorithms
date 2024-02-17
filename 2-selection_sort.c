@@ -8,8 +8,7 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	unsigned long int i, x, tmp;
-	int min;
+	unsigned long int i, x, tmp, min;
 
 	if (!array || !size)
 	{
@@ -21,7 +20,7 @@ void selection_sort(int *array, size_t size)
 		min = i;
 		for (x = i + 1; x < size; x++)
 		{
-			if (min > array[x])
+			if (array[min] > array[x])
 			{
 				min = x;
 			}
