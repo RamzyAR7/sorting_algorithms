@@ -11,8 +11,7 @@ This project implements various sorting algorithms in the C programming language
 3. [File Structure](#file-structure)
 4. [Compilation](#compilation)
 5. [Testing](#testing)
-6. [Contributors](#contributors)
-7. [License](#license)
+6. [Developeres](#Developeres)
 
 ## Introduction
 
@@ -53,6 +52,7 @@ To compile the source files, use the provided Makefile. Here's how to compile th
 make all
 
 ## Running Tests
+```
 
 To run tests, run the following command
 
