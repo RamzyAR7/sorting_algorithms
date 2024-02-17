@@ -32,6 +32,8 @@ void shell_sort(int *array, size_t size)
 {
 	size_t i, x, y, tmp, gap;
 
+	if (size < 2)
+		return;
 	if (!array || !size)
 	{
 		return;
