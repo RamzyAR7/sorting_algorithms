@@ -1,89 +1,79 @@
 #include "sort.h"
-/**
- * swap_element - swaps 2 elements
- * @element_a: element 1
- * @element_b: elemnet 2
- * @lst: listed to be sorted
-*/
-void swap_element(listint_t *element_a, listint_t *element_b, listint_t **lst)
-{
-	if ((element_b)->next != NULL)
-		((element_b)->next)->prev = element_a;
-	if ((element_a)->prev != NULL)
-		((element_a)->prev)->next = element_b;
-	else
-		*lst = element_b;
-	(element_a)->next = (element_b)->next;
-	(element_b)->prev = (element_a)->prev;
-	(element_a)->prev = element_b;
-	(element_b)->next = element_a;
-}
-/**
- * bubble_smaller_to_left - bubbles smaller elemnts to left
- * @iterate: pointer to nodes iterating over them
- * @list: list of nodes to sort
- * Return: 1 if swapped and elemnt else zero
-*/
-int bubble_smaller_to_left(listint_t **iterate, listint_t **list)
-{
-	int swap_flag = 0, cocktail_sort_swap = 0;
 
-	while ((*iterate)->prev)
-	{
-		swap_flag = 0;
-		if ((*iterate)->n < (*iterate)->prev->n)
-		{
-			swap_element((*iterate)->prev, *iterate, list);
-			print_list(*list);
-			swap_flag = 1;
-			cocktail_sort_swap = 1;
-		}
-		if (swap_flag == 0)
-			*iterate = (*iterate)->prev;
-	}
-	return (cocktail_sort_swap);
-}
-/**
- * bubble_larger_to_right - bubbles larger elemnts to right
- * @iterate: pointer to nodes iterating over them
- * @list: list of nodes to sort
- * Return: 1 if swapped and elemnt else zero
-*/
-int bubble_larger_to_right(listint_t **iterate, listint_t **list)
+size_t sort_to_right(listint_t **list, size_t swapped)
 {
-	int swap_flag = 0, cocktail_sort_swap = 0;
+	listint_t *current_node, *next_node;
 
-	while ((*iterate)->next)
+	current_node = *list;
+	while (current_node->next)
 	{
-		swap_flag = 0;
-		if ((*iterate)->n > ((*iterate)->next)->n)
+		if (current_node->n > current_node->next->n)
 		{
-			swap_element((*iterate), (*iterate)->next, list);
+			/* Swap current node with its next node */
+			next_node = current_node->next;
+			if (current_node->prev != NULL)
+				current_node->prev->next = next_node;
+			else
+				*list = next_node;
+			if (next_node->next != NULL)
+				next_node->next->prev = current_node;
+			current_node->next = next_node->next;
+			next_node->prev = current_node->prev;
+			current_node->prev = next_node;
+			next_node->next = current_node;
+
+			swapped = 1;
 			print_list(*list);
-			swap_flag = 1;
-			cocktail_sort_swap = 1;
 		}
-		if (swap_flag == 0)
-			*iterate = (*iterate)->next;
+		current_node = current_node->next;
 	}
-	return (cocktail_sort_swap);
+	return (swapped);
 }
-/**
- * cocktail_sort_list - sorts a list based on cocktailsort algorithm
- * @list: list
-*/
+
+size_t sort_to_left(listint_t **list, size_t swapped)
+{
+	listint_t *current_node, *prev_node;
+
+	current_node = *list;
+	while (current_node->prev != NULL)
+	{
+		prev_node = current_node->prev;
+		if (current_node->n < prev_node->n)
+		{
+			/* Swap current node with its previous node */
+			if (current_node->next != NULL)
+				current_node->next->prev = prev_node;
+			prev_node->next = current_node->next;
+			if (prev_node->prev != NULL)
+				prev_node->prev->next = current_node;
+			else
+				*list = current_node;
+			current_node->prev = prev_node->prev;
+			prev_node->prev = current_node;
+			current_node->next = prev_node;
+
+			swapped = 1;
+			print_list(*list);
+		}
+		current_node = prev_node;
+	}
+	return (swapped);
+}
+
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *iterate = *list;
-	int cocktail_sort_swap = 1;
+	size_t swapped;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-	while (cocktail_sort_swap)
-	{
-		cocktail_sort_swap = bubble_larger_to_right(&iterate, list);
-		if (cocktail_sort_swap == 0)
+
+	do {
+		swapped = 0;
+		swapped = sort_to_right(list, swapped);
+		if (!swapped)
 			break;
-		cocktail_sort_swap = bubble_smaller_to_left(&iterate, list);
-	}
+
+		swapped = 0;
+		swapped = sort_to_left(list, swapped);
+	} while (swapped);
 }
