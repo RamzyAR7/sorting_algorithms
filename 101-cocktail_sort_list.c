@@ -82,6 +82,8 @@ void cocktail_sort_list(listint_t **list)
 	while (cocktail_sort_swap)
 	{
 		cocktail_sort_swap = bubble_larger_to_right(&iterate, list);
+		if (cocktail_sort_swap == 0)
+			break;
 		cocktail_sort_swap = bubble_smaller_to_left(&iterate, list);
 	}
 }
