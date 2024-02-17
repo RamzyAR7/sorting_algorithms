@@ -1,5 +1,28 @@
 #include "sort.h"
 /**
+ * get_gap - Calculates the initial
+ * gap for the Shell sort algorithm.
+ * @size: The size of the array.
+ *
+ * Return: The initial gap value.
+ */
+size_t get_gap(size_t size)
+{
+	/*must be init by 1*/
+	size_t gap = 1;
+	/*find the max gap */
+	while (gap < size)
+	{
+		gap = gap * 3 + 1;
+	}
+	if (gap > size)
+	{
+		gap = (gap - 1) / 3;
+	}
+
+	return (gap);
+}
+/**
  * shell_sort - Sorts an array of integers in ascending
  * order using the Shell sort algorithm.
  * @array: The array to be sorted.
@@ -7,24 +30,17 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t i, x, y, tmp;
-
-	/*must be init by 1*/
-	size_t gap = 1;
+	size_t i, x, y, tmp, gap;
 
 	if (!array || !size)
 	{
 		return;
 	}
-	/*find the max gap */
-	while (gap < size / 3)
-	{
-		gap = gap * 3 + 1;
-	}
+	gap = get_gap(size);
 
 	while (gap != 0)
 	{
-		for (i = gap - 1; i < size; i++)
+		for (i = gap; i < size; i++)
 		{
 			y = i;
 			x = i - gap;
