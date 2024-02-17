@@ -34,5 +34,6 @@ void top_down_split_and_merge(int *array, int start, int end, int *array_b);
 int *duplicate_array(int *array, int size);
 void copy_array(int *array, int *array_b, int size);
 void top_down_merge(int *arr, int start, int midpoint, int end, int *arr_b);
+void shell_sort(int *array, size_t size);
 
 #endif
