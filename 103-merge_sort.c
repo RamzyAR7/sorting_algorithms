@@ -73,7 +73,7 @@ int *duplicate_array(int *array, int size)
 {
 	int *array_b = NULL, index;
 
-	array_b = malloc(sizeof(array));
+	array_b = malloc(sizeof(array) * size);
 	if (array_b == NULL)
 		return (array_b);
 	for (index = 0; index < size; index++)
