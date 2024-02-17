@@ -36,7 +36,5 @@ void copy_array(int *array, int *array_b, int size);
 void top_down_merge(int *arr, int start, int midpoint, int end, int *arr_b);
 void shell_sort(int *array, size_t size);
 size_t get_gap(size_t size);
-size_t sort_to_left(listint_t **current_node, listint_t **lst, size_t swapped);
-size_t sort_to_right(listint_t **current_node, listint_t **lst, size_t swapped);
 
 #endif
