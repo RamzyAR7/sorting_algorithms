@@ -110,6 +110,8 @@ void merge_sort(int *array, size_t size)
 {
 	int *array_b = NULL;
 
+	if (array == NULL)
+		return;
 	array_b = duplicate_array(array, size);
 	if (array_b == NULL)
 		return;
