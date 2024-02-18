@@ -39,5 +39,8 @@ void radix_sort(int *array, size_t size);
 void empty_array(int (*radix_box)[10000], int empty);
 void dist(int (*radix_box)[10000], int *arr, int sign_dgt, int empt, int size);
 void assign(int (*radix_box)[10000], int *array, int empty);
+void counting_sort(int *array, size_t size);
+int find_max_element(int *array, size_t size);
+int *count_array_sort(int *array, size_t size, int max_element);
 
 #endif
