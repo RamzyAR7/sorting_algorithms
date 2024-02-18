@@ -87,7 +87,7 @@ void radix_sort(int *array, size_t size)
 	}
 	empty = max + 1;
 	empty_array(radix_box, empty);
-	while (max > sign_dgt)
+	while (max >= sign_dgt)
 	{
 		dist(radix_box, array, sign_dgt, empty, size);
 		assign(radix_box, array, empty);
