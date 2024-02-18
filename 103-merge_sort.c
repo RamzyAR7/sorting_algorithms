@@ -1,20 +1,5 @@
 #include "sort.h"
 /**
- * copy_array - copies an array
- * @array: array
- * @array_b: array
- * @size: length of array
-*/
-void copy_array(int *array, int *array_b, int size)
-{
-	int index;
-
-	for (index = 0; index < size; index++)
-	{
-		array_b[index] = array[index];
-	}
-}
-/**
  * top_down_merge - merges two arrays based on their elements values
  * @arr: array
  * @arr_b: array
@@ -89,7 +74,7 @@ int *duplicate_array(int *array, int size)
  * @start: start index of the array
  * @end: end index of the array
 */
-void top_down_split_and_merge(int *array, int start, int end, int *array_b)
+void top_down_split_and_merge(int *array_b, int start, int end, int *array)
 {
 	int midpoint;
 
@@ -98,8 +83,7 @@ void top_down_split_and_merge(int *array, int start, int end, int *array_b)
 	midpoint = (start + end) / 2;
 	top_down_split_and_merge(array, start, midpoint, array_b);
 	top_down_split_and_merge(array, midpoint, end, array_b);
-	top_down_merge(array, start, midpoint, end, array_b);
-	copy_array(array, array_b, end);
+	top_down_merge(array_b, start, midpoint, end, array);
 }
 /**
  * merge_sort - sorts an array using merge sort algorithm
