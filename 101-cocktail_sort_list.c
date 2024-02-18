@@ -70,11 +70,12 @@ int bubble_larger_to_right(listint_t **iterate, listint_t **list)
 */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *iterate = *list;
+	listint_t *iterate;
 	int cocktail_sort_swap = 1;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
+	iterate = *list;
 	while (cocktail_sort_swap)
 	{
 		cocktail_sort_swap = bubble_larger_to_right(&iterate, list);
