@@ -4,13 +4,13 @@
  * @radix_box: double array
  * @empty: value of empty
 */
-void empty_array(int (*radix_box)[1000], int empty)
+void empty_array(int (*radix_box)[10000], int empty)
 {
 	int radix_index, radix_index_b;
 
 	for (radix_index = 0; radix_index < 10; radix_index++)
 	{
-		for (radix_index_b = 0; radix_index_b < 1000; radix_index_b++)
+		for (radix_index_b = 0; radix_index_b < 10000; radix_index_b++)
 		{
 			radix_box[radix_index][radix_index_b] = empty;
 		}
@@ -21,10 +21,10 @@ void empty_array(int (*radix_box)[1000], int empty)
  * @radix_box: double array
  * @arr: array
  * @sign_dgt: specifies number of interest
- * @empty: indicate empty slot
+ * @empt: indicate empty slot
  * @size: size of array
 */
-void dist(int (*radix_box)[1000], int *arr, int sign_dgt, int empty, int size)
+void dist(int (*radix_box)[10000], int *arr, int sign_dgt, int empt, int size)
 {
 	int radix_index, radix_index_b, index;
 
@@ -34,7 +34,7 @@ void dist(int (*radix_box)[1000], int *arr, int sign_dgt, int empty, int size)
 		{
 			if ((arr[index] / sign_dgt) % 10 == radix_index)
 			{
-				if (radix_box[radix_index][radix_index_b] == empty)
+				if (radix_box[radix_index][radix_index_b] == empt)
 					radix_box[radix_index][radix_index_b] = arr[index];
 				else
 				{
@@ -51,13 +51,13 @@ void dist(int (*radix_box)[1000], int *arr, int sign_dgt, int empty, int size)
  * @array: array
  * @empty: indicate empty slot
 */
-void assign(int (*radix_box)[1000], int *array, int empty)
+void assign(int (*radix_box)[10000], int *array, int empty)
 {
 	int radix_index, radix_index_b, index = -1;
 
 	for (radix_index = 0; radix_index < 10; radix_index++)
 	{
-		for (radix_index_b = 0; radix_index_b < 1000; radix_index_b++)
+		for (radix_index_b = 0; radix_index_b < 10000; radix_index_b++)
 		{
 			if (radix_box[radix_index][radix_index_b] != empty)
 			{
@@ -75,7 +75,7 @@ void assign(int (*radix_box)[1000], int *array, int empty)
 void radix_sort(int *array, size_t size)
 {
 	int  index = 0, sign_dgt = 1, length = size, max;
-	int radix_box[10][1000], empty;
+	int radix_box[10][10000], empty;
 
 	if (array == NULL || size < 2)
 		return;
