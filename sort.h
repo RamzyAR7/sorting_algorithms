@@ -36,8 +36,8 @@ void top_down_merge(int *arr, int start, int midpoint, int end, int *arr_b);
 void shell_sort(int *array, size_t size);
 size_t get_gap(size_t size);
 void radix_sort(int *array, size_t size);
-void empty_array(int (*radix_box)[100], int empty);
-void dist(int (*radix_box)[100], int *arr, int sign_dgt, int empty, int size);
-void assign(int (*radix_box)[100], int *array, int empty);
+void empty_array(int (*radix_box)[1000], int empty);
+void dist(int (*radix_box)[1000], int *arr, int sign_dgt, int empty, int size);
+void assign(int (*radix_box)[1000], int *array, int empty);
 
 #endif
