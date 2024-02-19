@@ -42,5 +42,8 @@ void assign(int (*radix_box)[1000], int *array, int empty);
 void counting_sort(int *array, size_t size);
 int find_max_element(int *array, size_t size);
 int *count_array_sort(int *array, size_t size, int max_element);
+void swap(int *x, int *y);
+void sift_down(int *array, size_t size, size_t idx, size_t max_num);
+void heap_sort(int *array, size_t size);
 
 #endif
