@@ -1,92 +1,90 @@
 #include "sort.h"
-
 /**
- * swap1 - Swaps two elements in an array.
- * @array: The array containing the elements.
- * @i: The index of the first element to swap.
- * @x: The index of the second element to swap.
- * @dir: The direction of the sorting (1 for ascending, 0 for descending).
+ * swap1 - swaps elements of the array checking the position
+ * @array: Array with numbers to be sorted
+ * @i: position
+ * @j: position
+ * @dir: 1 if is ascending
  */
-void swap1(int *array, size_t i, size_t x, size_t dir)
+void swap1(int *array, size_t i, size_t j, size_t dir)
 {
 	int tmp = 0;
 
-	if (dir == (array[i] > array[x]))
+	if (dir == (array[i] > array[j]))
 	{
 		tmp = array[i];
-		array[i] = array[x];
-		array[x] = tmp;
+		array[i] = array[j];
+		array[j] = tmp;
 	}
 }
-
 /**
- * merge - Merges two subarrays of an array.
- * @array: The array containing the subarrays to merge.
- * @low: The starting index of the first subarray.
- * @size: The size of the subarrays to merge.
- * @dir: The direction of the sorting (1 for ascending, 0 for descending).
+ * merge - swaps elements of the array
+ * @array: Array with numbers to be sorted
+ * @low: Starting point of the lower part of the array
+ * @size: size of the new partition
+ * @dir: 1 if is ascending
  */
 void merge(int *array, size_t low, size_t size, size_t dir)
 {
-	size_t i = 0, x = 0;
+	size_t k = 0, i = 0;
 
 	if (size > 1)
 	{
-		i = size / 2;
-		x = low;
-		while (x < low + i)
-			swap1(array, x, x + i, dir), x++;
-		merge(array, low, i, dir);
-		merge(array, low + i, i, dir);
+		k = size / 2;
+		i = low;
+		while (i < low + k)
+			swap1(array, i, i + k, dir), i++;
+		merge(array, low, k, dir);
+		merge(array, low + k, k, dir);
 	}
 }
-
 /**
- * sort_the_array - Sorts a subarray of an array in a specified direction.
- * @array: The array to sort.
- * @low: The starting index of the subarray.
- * @size: The size of the subarray.
- * @dir: The direction of the sorting (1 for ascending, 0 for descending).
- * @len: The length of the original array.
+ * sort_ - Sorts the array using recursion
+ * @array: Array with numbers to be sorted
+ * @low: Starting point of the lower part of the array
+ * @size: size of the new partition
+ * @dir: 1 if is ascending
+ * @length: size of the original array
  */
-void sort_the_array(int *array, size_t low,
-size_t size, size_t dir, size_t len)
+void sort_(int *array, size_t low, size_t size, size_t dir, size_t length)
 {
-	size_t i = 0;
-	int *ptr = NULL;
+	size_t k = 0;
+	int *aux = NULL;
 
 	if (size > 1)
 	{
-		i = size / 2;
-		if (i > 1)
+		k = size / 2;
+		if (k > 1)
 		{
-			printf("Merging [%li/%li] (UP):\n", i, len);
-			ptr = &array[low];
-			print_array(ptr, i);
+			printf("Merging [%li/%li] (UP):\n", k, length);
+			aux = &array[low];
+			print_array(aux, k);
 		}
-		sort_the_array(array, low, i, 1, len);
-		if (i > 1)
+		sort_(array, low, k, 1, length);
+		if (k > 1)
 		{
-			printf("Result [%li/%li] (UP):\n", i, len);
-			print_array(ptr, i);
-			printf("Merging [%li/%li] (DOWN):\n", i, len);
-			ptr = &array[low + i];
-			print_array(ptr, i);
+			printf("Result [%li/%li] (UP):\n", k, length);
+			print_array(aux, k);
+			printf("Merging [%li/%li] (DOWN):\n", k, length);
+			aux = &array[low + k];
+			print_array(aux, k);
 		}
-		sort_the_array(array, low + i, i, 0, len);
-		if (i > 1)
+		sort_(array, low + k, k, 0, length);
+		if (k > 1)
 		{
-			printf("Result [%li/%li] (DOWN):\n", i, len);
-			print_array(ptr, i);
+			printf("Result [%li/%li] (DOWN):\n", k, length);
+			print_array(aux, k);
 		}
 		merge(array, low, size, dir);
 	}
 }
-
 /**
- * bitonic_sort - Sorts an array using the bitonic sort algorithm.
- * @array: The array to be sorted.
- * @size: The size of the array.
+ * bitonic_sort - Bitonic sort is a comparison-based sorting algorithm
+ * that can be run in parallel. It focuses on converting a random sequence
+ * of numbers into a bitonic sequence, one that monotonically increases, then
+ * decreases. Rotations of a bitonic sequence are also bitonic.
+ * @array: Array of data to be sorted
+ * @size: size of the original array
  */
 void bitonic_sort(int *array, size_t size)
 {
@@ -98,7 +96,7 @@ void bitonic_sort(int *array, size_t size)
 		return;
 	printf("Mergin [%li/%li] (UP):\n", size, size);
 	print_array(array, size);
-	sort_the_array(array, 0, size, 1, size);
+	sort_(array, 0, size, 1, size);
 	printf("Result [%li/%li] (UP):\n", size, size);
 	print_array(array, size);
 }
