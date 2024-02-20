@@ -9,6 +9,8 @@ void quick_sort_hoare(int *array, size_t size)
 {
 	int start = 0, end = size - 1;
 
+	if (array == NULL || size < 2)
+		return;
 	QuickSort_Haore(array, start, end, size);
 }
 /**
