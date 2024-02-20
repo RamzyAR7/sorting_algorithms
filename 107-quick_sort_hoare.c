@@ -31,7 +31,7 @@ int Haore_Partition(int *arr, int start, int end, int size)
 	iterate_front = end;
 	while (1)
 	{
-		while (arr[iterate_back] < pivot && iterate_back < end)
+		while (arr[iterate_back] < pivot)
 		{
 			iterate_back++;
 		}
