@@ -2,53 +2,52 @@
 #include <stdio.h>
 
 /**
- * printcheck - print a range
- * @array: The array to print
- * @r1: Less range
- * @r2: Final range
- * Return: Nothing
+ * print_range - Print a range of elements in an array.
+ * @array: The array to print.
+ * @start: The starting index of the range.
+ * @end: The ending index of the range.
  */
-void printcheck(int *array, int r1, int r2)
+void print_range(int *array, int start, int end)
 {
 	int i;
 
-	for (i = r1; i <= r2; i++)
+	for (i = start; i <= end; i++)
 	{
-		if (i > r1)
+		if (i > start)
 			printf(", ");
 		printf("%d", array[i]);
 	}
 	printf("\n");
 }
+
 /**
- * _swap - swap two elements in an array
- * @array: THe array to change the values
- * @i: A index
- * @j: Another index
- * @dir: Direction of the array
- * Return: Nothing
+ * swap1 - Swap two elements in an array.
+ * @array: The array containing the elements.
+ * @i: The index of the first element to swap.
+ * @x: The index of the second element to swap.
+ * @dir: The direction of the swap.
  */
-void _swap(int *array, int i, int j, int dir)
+void swap1(int *array, int i, int x, int dir)
 {
 	int tmp;
 
-	if (dir == (array[i] > array[j]))
+	if (dir == (array[i] > array[x]))
 	{
 		tmp = array[i];
-		array[i] = array[j];
-		array[j] = tmp;
+		array[i] = array[x];
+		array[x] = tmp;
 	}
 }
+
 /**
- * bitonic_merge - swap the elements to sort
- * @array: Array to sort
- * @low: The low element in the range to sort
- * @size: The size of the range to sort
- * @dir: Indicate which half are manage
- * @r_size: The size of the all array
- * Return: Nothing
+ * merge - Merge two subarrays in a bitonic sequence.
+ * @array: The array to merge.
+ * @low: The starting index of the first subarray.
+ * @size: The size of each subarray.
+ * @dir: The direction of the merge.
+ * @array_size: The size of the original array.
  */
-void bitonic_merge(int *array, int low, int size, int dir, const int r_size)
+void merge(int *array, int low, int size, int dir, const int array_size)
 {
 	int k = size, i = low;
 
@@ -57,48 +56,48 @@ void bitonic_merge(int *array, int low, int size, int dir, const int r_size)
 		k = size / 2;
 
 		for (i = low; i < low + k; i++)
-			_swap(array, i, i + k, dir);
+			swap1(array, i, i + k, dir);
 
-		bitonic_merge(array, low, k, dir, r_size);
-		bitonic_merge(array, low + k, k, dir, r_size);
+		merge(array, low, k, dir, array_size);
+		merge(array, low + k, k, dir, array_size);
 	}
 }
+
 /**
- * _sort - segmentate the array
- * @array: The array to sort
- * @low: The lowest element in each range
- * @size: Size of the range to sort
- * @dir: Indicate which half are manage
- * @r_size: The size of the all array
- * Return: Nothing
+ * _sort - Sorts a subarray in bitonic order.
+ * @array: The array to sort.
+ * @low: The starting index of the subarray.
+ * @size: The size of the subarray.
+ * @dir: The direction of the sort.
+ * @array_size: The size of the original array.
  */
-void _sort(int *array, int low, int size, int dir, const int r_size)
+void _sort(int *array, int low, int size, int dir, const int array_size)
 {
-	int k = size;
+	int i = size;
 
 	if (size > 1)
 	{
 		if (dir == 1)
-			printf("Merging [%d/%d] (UP):\n", size, r_size);
+			printf("Merging [%d/%d] (UP):\n", size, array_size);
 		if (dir == 0)
-			printf("Merging [%d/%d] (DOWN):\n", size, r_size);
-		printcheck(array, low, low + k - 1);
+			printf("Merging [%d/%d] (DOWN):\n", size, array_size);
+		print_range(array, low, low + i - 1);
 
-		k = size / 2;
-		_sort(array, low, k, 1, r_size);
+		i = size / 2;
+		_sort(array, low, i, 1, array_size);
 
-		_sort(array, low + k, k, 0, r_size);
+		_sort(array, low + i, i, 0, array_size);
 
-		bitonic_merge(array, low, size, dir, r_size);
+		merge(array, low, size, dir, array_size);
 		if (dir == 1)
 		{
-			printf("Result [%d/%d] (UP):\n", size, r_size);
-			printcheck(array, low, low + 2 * k - 1);
+			printf("Result [%d/%d] (UP):\n", size, array_size);
+			print_range(array, low, low + 2 * i - 1);
 		}
 		if (dir == 0)
 		{
-			printf("Result [%d/%d] (DOWN):\n", size, r_size);
-			printcheck(array, low, low + 2 * k - 1);
+			printf("Result [%d/%d] (DOWN):\n", size, array_size);
+			print_range(array, low, low + 2 * i - 1);
 		}
 	}
 }
