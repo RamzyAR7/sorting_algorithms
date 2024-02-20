@@ -1,6 +1,5 @@
 #include "sort.h"
 #include <stdio.h>
-
 /**
  * print_range - Print a range of elements in an array.
  * @array: The array to print.
@@ -19,7 +18,6 @@ void print_range(int *array, int start, int end)
 	}
 	printf("\n");
 }
-
 /**
  * swap1 - Swap two elements in an array.
  * @array: The array containing the elements.
@@ -38,7 +36,6 @@ void swap1(int *array, int i, int x, int dir)
 		array[x] = tmp;
 	}
 }
-
 /**
  * merge - Merge two subarrays in a bitonic sequence.
  * @array: The array to merge.
@@ -62,7 +59,6 @@ void merge(int *array, int low, int size, int dir, const int array_size)
 		merge(array, low + k, k, dir, array_size);
 	}
 }
-
 /**
  * _sort - Sorts a subarray in bitonic order.
  * @array: The array to sort.
