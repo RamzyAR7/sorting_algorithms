@@ -1,3 +1,6 @@
+/* 106-bitonic_sort.c */
+
+#include <stdio.h>
 #include "sort.h"
 
 /**
@@ -15,6 +18,8 @@ void merge(int *array, size_t start, size_t count, int dir)
 	{
 		size_t k = count / 2;
 
+		printf("Merging [%lu/%lu] (%s):\n", count, count * 2, dir == 1 ? "UP" : "DOWN");
+		print_array(array + start, count * 2);
 		for (i = start; i < start + k; i++)
 		{
 			if ((array[i] > array[i + k]) == dir)
@@ -23,9 +28,6 @@ void merge(int *array, size_t start, size_t count, int dir)
 
 				array[i] = array[i + k];
 				array[i + k] = temp;
-				printf("Result [%lu/%lu] (%s):\n"
-				, count, count * 2, dir == 1 ? "UP" : "DOWN");
-				print_array(array, count * 2);
 			}
 		}
 		merge(array, start, k, dir);
@@ -46,28 +48,22 @@ void bitonic_merge(int *array, size_t start, size_t count, int dir)
 	{
 		size_t k = count / 2;
 
-		printf("Merging [%lu/%lu] (%s):\n",
-		count, count * 2, dir == 1 ? "UP" : "DOWN");
-		print_array(array + start, count * 2);
 		bitonic_merge(array, start, k, 1);
+
 		bitonic_merge(array, start + k, k, 0);
-		merge(array + start, start, count, dir);
+		merge(array, start, count, dir);
 	}
 }
 
 /**
- * bitonic_sort - Sorts an array of integers in ascending
- * order using the Bitonic sort algorithm
+ * bitonic_sort - Sorts an array of integers in
+ * ascending order using the Bitonic sort algorithm
  * @array: The array to be sorted
  * @size: Size of the array
  */
 void bitonic_sort(int *array, size_t size)
 {
-	if (!array || !size || size < 2)
-	{
-		return;
-	}
-	else
+	if (size > 1)
 	{
 		bitonic_merge(array, 0, size, 1);
 	}
