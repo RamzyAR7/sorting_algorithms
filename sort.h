@@ -45,10 +45,10 @@ int *count_array_sort(int *array, size_t size, int max_element);
 void swap(int *x, int *y);
 void sift_down(int *array, size_t size, size_t idx, size_t max_num);
 void heap_sort(int *array, size_t size);
-void sort_the_array(int *array, size_t low,
-size_t size, size_t dir, size_t len);
-void merge(int *array, size_t low, size_t size, size_t dir);
-void swap1(int *array, size_t i, size_t x, size_t dir);
+void printcheck(int *array, int r1, int r2);
+void _swap(int *array, int i, int j, int dir);
+void bitonic_merge(int *array, int low, int size, int dir, const int r_size);
+void _sort(int *array, int low, int size, int dir, const int r_size);
 void bitonic_sort(int *array, size_t size);
 
 #endif
