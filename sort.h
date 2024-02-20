@@ -51,8 +51,8 @@ void swap1(int *array, int i, int x, int dir);
 void merge(int *array, int low, int size, int dir, const int array_size);
 void _sort(int *array, int low, int size, int dir, const int array_size);
 void bitonic_sort(int *array, size_t size);
-int Haore_Partition(int *arr, int start, int end, int size);
-void QuickSort_Haore(int *arr, int start, int end, int size);
+int haore_partition(int *arr, int start, int end, int size);
+void quicksort_haore(int *arr, int start, int end, int size);
 void quick_sort_hoare(int *array, size_t size);
 
 #endif

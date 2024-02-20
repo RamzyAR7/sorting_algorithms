@@ -9,17 +9,17 @@ void quick_sort_hoare(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
-	QuickSort_Haore(array, 0, (size - 1), size);
+	quicksort_haore(array, 0, (size - 1), size);
 }
 /**
- * Haore_Partition - parts the array base on the order of its values
+ * haore_partition - parts the array base on the order of its values
  * @arr: array
  * @start: start of array
  * @end: end of array
  * @size: size of array
  * Return: Index of partition
 */
-int Haore_Partition(int *arr, int start, int end, int size)
+int haore_partition(int *arr, int start, int end, int size)
 {
 	int pivot;
 	int iterate_back, iterate_front, temp, test_a, test_b;
@@ -61,22 +61,22 @@ int Haore_Partition(int *arr, int start, int end, int size)
 	}
 }
 /**
- * QuickSort_Haore - sorts an array using quick sort based on haore method
+ * quicksort_haore - sorts an array using quick sort based on haore method
  * @arr: array
  * @start: start of array
  * @end: end of array
  * @size: size of array
 */
-void QuickSort_Haore(int *arr, int start, int end, int size)
+void quicksort_haore(int *arr, int start, int end, int size)
 {
 	int pi;
 
 	if (start < end)
 	{
-		pi = Haore_Partition(arr, start, end, size);
+		pi = haore_partition(arr, start, end, size);
 		if (pi == -1)
 			return;
-		QuickSort_Haore(arr, start, (pi - 1), size);
-		QuickSort_Haore(arr, pi, end, size);
+		quicksort_haore(arr, start, (pi - 1), size);
+		quicksort_haore(arr, pi, end, size);
 	}
 }
