@@ -4,7 +4,7 @@
 
 /**
  * main - Entry point
- *
+ * by ramzy
  * Return: Always 0
  */
 int main(void)
