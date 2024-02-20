@@ -63,7 +63,7 @@ void QuickSort_Haore(int *arr, int start, int end, int size)
 {
 	int pi;
 
-	if (start < end && start >= 0 && end >= 0)
+	if (start < end)
 	{
 		pi = Haore_Partition(arr, start, end, size);
 		QuickSort_Haore(arr, start, (pi - 1), size);
