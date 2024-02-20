@@ -7,11 +7,9 @@
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-	int start = 0, end = size - 1;
-
 	if (array == NULL || size < 2)
 		return;
-	QuickSort_Haore(array, start, end, size);
+	QuickSort_Haore(array, 0, (size - 1), size);
 }
 /**
  * Haore_Partition - parts the array base on the order of its values
@@ -24,13 +22,23 @@ void quick_sort_hoare(int *array, size_t size)
 int Haore_Partition(int *arr, int start, int end, int size)
 {
 	int pivot;
-	int iterate_back, iterate_front, temp;
+	int iterate_back, iterate_front, temp, test_a, test_b;
 
 	pivot = arr[end];
-	iterate_back = start;
-	iterate_front = end;
+	test_a = iterate_back = start;
+	test_b = iterate_front = end;
 	while (1)
 	{
+		if (arr[iterate_back] == arr[iterate_front])
+		{
+			while (arr[test_a] == arr[test_b])
+			{
+				test_a++;
+				test_b--;
+				if (test_a >= test_b)
+					return (-1);
+			}
+		}
 		while (arr[iterate_back] < pivot)
 		{
 			iterate_back++;
@@ -66,6 +74,8 @@ void QuickSort_Haore(int *arr, int start, int end, int size)
 	if (start < end)
 	{
 		pi = Haore_Partition(arr, start, end, size);
+		if (pi == -1)
+			return;
 		QuickSort_Haore(arr, start, (pi - 1), size);
 		QuickSort_Haore(arr, pi, end, size);
 	}
